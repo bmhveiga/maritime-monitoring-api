@@ -1,16 +1,15 @@
 package com.bruno.maritime.controller;
 import com.bruno.maritime.model.Vessel;
-import com.bruno.maritime.service.VesselService;
+import com.bruno.maritime.service.VesselServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class VesselController {
-    private final VesselService vesselService;
+    private final VesselServiceImpl vesselService;
 
-    public VesselController(VesselService vesselService) {
+    public VesselController(VesselServiceImpl vesselService) {
         this.vesselService = vesselService;
         System.out.println("GreetingService object: " + vesselService);
     }

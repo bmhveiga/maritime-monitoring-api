@@ -1,6 +1,6 @@
 package com.bruno.maritime.controller;
 import com.bruno.maritime.model.MaritimeEvent;
-import com.bruno.maritime.service.MaritimeEventService;
+import com.bruno.maritime.service.MaritimeEventServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 @RestController
 public class MaritimeEventController {
 
-    private final MaritimeEventService maritimeEventService;
+    private final MaritimeEventServiceImpl maritimeEventService;
 
-    public MaritimeEventController(MaritimeEventService maritimeEventService) {
+    public MaritimeEventController(MaritimeEventServiceImpl maritimeEventService) {
         this.maritimeEventService = maritimeEventService;
     }
 
