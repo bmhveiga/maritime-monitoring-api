@@ -1,5 +1,6 @@
 package com.bruno.maritime.service;
 
+import com.bruno.maritime.exception.ResourceNotFoundException;
 import com.bruno.maritime.model.MaritimeEvent;
 import com.bruno.maritime.repository.MaritimeEventRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class MaritimeEventServiceImpl implements MaritimeEventService{
     }
 
     public MaritimeEvent getMaritimeEvent(Long id){
-        return maritimeEventRepository.findById(id).orElse(null);
+        return maritimeEventRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Maritime event not found with id: " + id));
     }
 
     public MaritimeEvent createMaritimeEvent(MaritimeEvent maritimeEvent){
@@ -28,6 +29,9 @@ public class MaritimeEventServiceImpl implements MaritimeEventService{
     }
 
     public void deleteMaritimeEvent(Long id){
+        if (!maritimeEventRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Maritime Event not found with id: " + id);
+        }
         maritimeEventRepository.deleteById(id);
     }
 }

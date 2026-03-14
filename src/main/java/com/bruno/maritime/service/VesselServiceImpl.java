@@ -1,5 +1,6 @@
 package com.bruno.maritime.service;
 
+import com.bruno.maritime.exception.ResourceNotFoundException;
 import com.bruno.maritime.model.Vessel;
 import com.bruno.maritime.repository.VesselRepository;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class VesselServiceImpl implements VesselService{
         return vesselRepository.findAll();
     }
 
-    public Vessel getVesselById(Long id){
-        return vesselRepository.findById(id).orElse(null);
+    public Vessel getVesselById(Long id) {
+        return vesselRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vessel not found with id: " + id));
     }
 
     public Vessel createVessel(Vessel vessel) {
@@ -27,6 +28,9 @@ public class VesselServiceImpl implements VesselService{
     }
 
     public void deleteVessel(Long id){
+        if (!vesselRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Vessel not found with id: " + id);
+        }
         vesselRepository.deleteById(id);
     }
 }
